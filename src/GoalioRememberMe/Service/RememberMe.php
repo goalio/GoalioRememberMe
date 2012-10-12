@@ -79,7 +79,7 @@ class RememberMe extends EventProvider implements ServiceManagerAwareInterface
     {
         $cookieLength = $this->getOptions()->getCookieExpire();
         $cookieValue = $entity->getUserId() . "\n" . $entity->getSid() . "\n" . $entity->getToken();
-        return setcookie("remember_me", $cookieValue, time() + $cookieLength, null, null, null, true);
+        return setcookie("remember_me", $cookieValue, time() + $cookieLength, '/', null, null, true);
     }
 
     /**

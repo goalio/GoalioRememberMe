@@ -23,7 +23,7 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
     public function authenticate(AuthEvent $e)
     {
         // check if cookie needs to be set, only when prior auth has been successful
-        if($e->getIdentity() !== null && $e->getRequest()->isPost() && $e->getRequest()->getPost()->get('remember_me') === 1) {
+        if($e->getIdentity() !== null && $e->getRequest()->isPost() && $e->getRequest()->getPost()->get('remember_me') == 1) {
             $userObject = $this->getUserMapper()->findById($e->getIdentity());
             $this->getRememberMeService()->createSerie($userObject->getId());
 
@@ -162,8 +162,11 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
         $user = $authService->getIdentity();
 
         $cookie = explode("\n", $this->getRememberMeService()->getCookie());
-        $this->getRememberMeService()->removeSerie($user->getId(), $cookie[1]);
-        $this->getRememberMeService()->removeCookie();
+
+        if($cookie[0] !== '') {
+            $this->getRememberMeService()->removeSerie($user->getId(), $cookie[1]);
+            $this->getRememberMeService()->removeCookie();
+        }
     }
 
 }

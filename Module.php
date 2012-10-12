@@ -54,6 +54,19 @@ class Module {
 
     public function onBootstrap(MvcEvent $e) {
 
+        $session = new \Zend\Session\Container('zfcuser');
+        $cookieLogin = $session->offsetGet("cookieLogin");
+        $cookie = $e->getRequest()->getCookie();
+
+        // do autologin only if not done before and cookie is present
+        if(isset($cookie['remember_me']) && $cookieLogin == false) {
+            $adapter = $e->getApplication()->getServiceManager()->get('ZfcUser\Authentication\Adapter\AdapterChain');
+            $adapter->prepareForAuthentication($e->getRequest());
+            $authService = $e->getApplication()->getServiceManager()->get('zfcuser_auth_service');
+
+            $auth = $authService->authenticate($adapter);
+        }
+
     }
 }
 
