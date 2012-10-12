@@ -1,0 +1,31 @@
+{
+    "name": "goalio/goalio-rememberme",
+    "description": "Adding Remember Me functionalitiy to ZfcUser",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "zfcuser"
+    ],
+    "homepage": "https://github.com/goalio/GoalioRememberMe",
+    "authors": [
+        {
+            "name": "Philipp Dobrigkeit",
+            "email": "p.dobrigkeit@goalio.de",
+            "homepage": "http://www.goalio.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.*",
+        "zf-commons/zfc-base": "dev-master",
+        "zf-commons/zfc-user": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "GoalioRememberMe": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
