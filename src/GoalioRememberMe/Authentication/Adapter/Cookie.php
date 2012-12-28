@@ -58,6 +58,7 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
         $rememberMe = $this->getRememberMeMapper()->findByIdSerie($cookie[0], $cookie[1]);
 
         if(!$rememberMe) {
+            $this->getRememberMeService()->removeCookie();
             return false;
         }
 
@@ -66,6 +67,7 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
             // H4x0r
             // @TODO: Inform user of theft, change password?
             $this->getRememberMeMapper()->removeAll($cookie[0]);
+            $this->getRememberMeService()->removeCookie();
             $this->setSatisfied(false);
 
             $e->setCode(AuthenticationResult::FAILURE)
