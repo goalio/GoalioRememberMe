@@ -1,6 +1,6 @@
 <?php
 
-namespace GoalioRemeberMe\Entity;
+namespace GoalioRememberMe\Entity;
 
 class RememberMe
 {
