@@ -11,7 +11,6 @@ class RememberMe extends AbstractDbMapper
     public function findById($userId)
     {
         $select = $this->getSelect()
-            ->from($this->tableName)
             ->where(array('user_id' => $userId));
 
         $entity = $this->select($select)->current();
@@ -22,7 +21,6 @@ class RememberMe extends AbstractDbMapper
     public function findByIdSerie($userId, $serieId)
     {
         $select = $this->getSelect()
-            ->from($this->tableName)
             ->where(array('user_id' => $userId, 'sid' => $serieId));
 
         $entity = $this->select($select)->current();
