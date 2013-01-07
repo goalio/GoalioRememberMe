@@ -106,7 +106,7 @@ Options
 -------
 
 The RememberMe module has some options to allow you to quickly customize the basic
-functionality. After installing ZfcUser, copy
+functionality. After installing, copy
 `./vendor/goalio/goalio-rememberme/config/goaliorememberme.global.php.dist` to
 `./config/autoload/goaliorememberme.global.php` and change the values as desired.
 
