@@ -28,6 +28,7 @@ class Module {
         return array(
             'invokables' => array(
                 'GoalioRememberMe\Authentication\Adapter\Cookie' => 'GoalioRememberMe\Authentication\Adapter\Cookie',
+                'GoalioRememberMe\Form\Login'                    => 'GoalioRememberMe\Form\Login',
                 'goaliorememberme_rememberme_service'            => 'GoalioRememberMe\Service\RememberMe',
             ),
 
@@ -48,6 +49,13 @@ class Module {
                     $mapper->setHydrator(new Mapper\RememberMeHydrator());
                     return $mapper;
                 },
+
+                'zfcuser_login_form' => function($sm) {
+                    $options = $sm->get('zfcuser_module_options');
+                    $form = new Form\Login(null, $options);
+                    $form->setInputFilter(new \ZfcUser\Form\LoginFilter($options));
+                    return $form;
+                },
             ),
         );
     }
@@ -55,12 +63,13 @@ class Module {
 
     public function onBootstrap(MvcEvent $e) {
 
-        $session = new \Zend\Session\Container('zfcuser');
-        $cookieLogin = $session->offsetGet("cookieLogin");
-        if(!$e->getRequest() instanceof HttpRequest)
-        {
+        if(!$e->getRequest() instanceof HttpRequest) {
             return;
         }
+
+        $session = new \Zend\Session\Container('zfcuser');
+        $cookieLogin = $session->offsetGet("cookieLogin");
+
         $cookie = $e->getRequest()->getCookie();
         // do autologin only if not done before and cookie is present
         if(isset($cookie['remember_me']) && $cookieLogin == false) {
@@ -70,7 +79,6 @@ class Module {
 
             $auth = $authService->authenticate($adapter);
         }
-
     }
 }
 

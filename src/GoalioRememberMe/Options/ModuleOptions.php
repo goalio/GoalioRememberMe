@@ -21,7 +21,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * @var string
      */
-    protected $rememberMeEntityClass = 'GoalioRememberMe\Entity\User';
+    protected $rememberMeEntityClass = 'GoalioRememberMe\Entity\RememberMe';
 
     public function setCookieExpire($seconds)
     {

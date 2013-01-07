@@ -6,7 +6,7 @@ use ZfcBase\Mapper\AbstractDbMapper;
 
 class RememberMe extends AbstractDbMapper
 {
-    protected $tableName  = 'remember_me';
+    protected $tableName  = 'user_remember_me';
 
     public function findById($userId)
     {
