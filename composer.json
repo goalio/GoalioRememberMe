@@ -1,5 +1,5 @@
 {
-    "name": "goalio/goalio-rememberme",
+    "name": "stijnkoopal/goalio-rememberme",
     "description": "Adding Remember Me functionalitiy to ZfcUser",
     "type": "library",
     "keywords": [
