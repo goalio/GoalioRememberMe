@@ -6,7 +6,7 @@ Version 0.0.2 Created by the goalio UG (haftungsbeschränkt)
 Introduction
 ------------
 
-GoalioRememberMe is an extension module for ZfcUser that provides functionality to 
+GoalioRememberMe is an extension module for ZfcUser that provides functionality to
 stay logged in on subsequent visits to the site.
 
 Requirements
@@ -34,9 +34,7 @@ Installation
 
     ```json
     "require": {
-        "zf-commons/zfc-base": "dev-master",
-        "zf-commons/zfc-user": "dev-master",
-        "goalio/goalio-rememberme": "dev-master"
+        "goalio/goalio-rememberme": "0.*"
     }
     ```
 
@@ -115,27 +113,27 @@ The following options are available:
 - **remember_me_entity_class** - Name of Entity class to use. Useful for using your own
   entity class instead of the default one provided. Default is
   `GoalioRememberMe\Entity\RememberMe`.
-- **cookie_expire** - Integer value in seconds when the login cookie should expire. 
+- **cookie_expire** - Integer value in seconds when the login cookie should expire.
   Default is `2592000` (30 days).
-- **cookie_domain** - String value for the domain this cookie should be set for. 
+- **cookie_domain** - String value for the domain this cookie should be set for.
   Default is null.
-  
+
 Security
 --------
 
-Having such a cookie for login purposes weakens your application security, as it is possible to 
+Having such a cookie for login purposes weakens your application security, as it is possible to
 guess those values and they offer a second entry point besides the identity/credential combination
-used by default. 
+used by default.
 
 In order to reduce this risk precautions have been taken. For example the solutions mentioned in
-http://jaspan.com/improved_persistent_login_cookie_best_practice allow to identify if a remember me 
+http://jaspan.com/improved_persistent_login_cookie_best_practice allow to identify if a remember me
 token has been used by another person and give the necessary hints to the user (change password etc.).
 
 Customization
 -------------
 
 Please comment on any problems with this module or give feedback if anything does not work
-Out-of-the-Box. There should not really be any requirement to modify the behaviour, unless 
+Out-of-the-Box. There should not really be any requirement to modify the behaviour, unless
 security problems arise, but as I am creative with the use of modules myself, I would be very
 interested in hearing what can be done to extend the functionality.
 
@@ -143,12 +141,12 @@ How does it work
 ----------------
 
 This module adds an additional AuthenticationAdapter to the Process in ZfcUser. If any prior
-authentication is successful (i.e. the default) and the user requests to set a cookie, the 
+authentication is successful (i.e. the default) and the user requests to set a cookie, the
 adapter will do so and create the necessary updates in the DB to identify the cookie.
 
-On a later visit the presence of the cookie is checked during the bootstrap process of the 
+On a later visit the presence of the cookie is checked during the bootstrap process of the
 module to provide an early entry point to authenticate the user. It is stored in the session
-that the login was done via cookie, so certain actions should be prohibited without additional 
+that the login was done via cookie, so certain actions should be prohibited without additional
 login (i.e. change password, access payment information etc.).
 
 Acknowledgements
