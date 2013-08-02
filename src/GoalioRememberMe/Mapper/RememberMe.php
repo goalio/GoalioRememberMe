@@ -30,7 +30,7 @@ class RememberMe extends AbstractDbMapper
 
     public function updateSerie($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' && sid = "' . $entity->getSid() . '"';
+        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = "' . $entity->getSid() . '"';
         $hydrator = new RememberMeHydrator;
         return parent::update($entity, $where, $this->tableName, $hydrator);
     }
@@ -49,13 +49,13 @@ class RememberMe extends AbstractDbMapper
 
     public function remove($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' && sid = "' . $entity->getSid() . '" && token = "' . $entity->getToken() . '"';
+        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = "' . $entity->getSid() . '" AND token = "' . $entity->getToken() . '"';
         return parent::delete($where, $this->tableName);
     }
 
     public function removeSerie($userId, $serieId)
     {
-        $where = 'user_id = ' . $userId . ' && sid = "' . $serieId . '"';
+        $where = 'user_id = ' . $userId . ' AND sid = "' . $serieId . '"';
         return parent::delete($where, $this->tableName);
     }
 }
