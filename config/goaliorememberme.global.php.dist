@@ -24,6 +24,14 @@ $settings = array(
      * Accepted values: the number of seconds the user should be remembered
      */
     //'cookie_expire' => 2592000,
+    
+    /**
+     * Remember me cookie domain
+     *
+     * Default value: null (current domain)
+     * Accepted values: a string containing the domain (example.com), subdomains (sub.example.com) or the all subdomains qualifier (.example.com)
+     */
+    //'cookie_domain' => null,
 
     /**
      * End of GoalioRememberMe configuration

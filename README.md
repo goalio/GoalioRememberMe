@@ -117,6 +117,8 @@ The following options are available:
   `GoalioRememberMe\Entity\RememberMe`.
 - **cookie_expire** - Integer value in seconds when the login cookie should expire. 
   Default is `2592000` (30 days).
+- **cookie_domain** - String value for the domain this cookie should be set for. 
+  Default is null.
   
 Security
 --------
