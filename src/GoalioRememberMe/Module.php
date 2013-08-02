@@ -65,12 +65,11 @@ class Module {
             return;
         }
 
-        $session = new \Zend\Session\Container('zfcuser');
-        $cookieLogin = $session->offsetGet("cookieLogin");
-
+        $userIsLoggedIn = $e->getApplication()->getServiceManager()->get('zfcuser_auth_service')->hasIdentity();
         $cookie = $e->getRequest()->getCookie();
+
         // do autologin only if not done before and cookie is present
-        if(isset($cookie['remember_me']) && $cookieLogin == false) {
+        if(!$userIsLoggedIn && isset($cookie['remember_me'])) {
             $adapter = $e->getApplication()->getServiceManager()->get('ZfcUser\Authentication\Adapter\AdapterChain');
             $adapter->prepareForAuthentication($e->getRequest());
             $authService = $e->getApplication()->getServiceManager()->get('zfcuser_auth_service');

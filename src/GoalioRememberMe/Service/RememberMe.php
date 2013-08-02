@@ -67,7 +67,7 @@ class RememberMe extends EventProvider implements ServiceManagerAwareInterface
 
     public function removeCookie()
     {
-        setcookie("remember_me", "", time() - 3600);
+        setcookie("remember_me", "", time() - 3600, '/');
     }
 
     public static function getCookie()
