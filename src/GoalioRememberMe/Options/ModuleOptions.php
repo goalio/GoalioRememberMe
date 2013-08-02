@@ -21,6 +21,11 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * @var string
      */
+    protected $cookieDomain = null;
+    
+    /**
+     * @var string
+     */
     protected $rememberMeEntityClass = 'GoalioRememberMe\Entity\RememberMe';
 
     public function setCookieExpire($seconds)
@@ -41,5 +46,14 @@ class ModuleOptions extends AbstractOptions implements
 
 	public function getRememberMeEntityClass() {
         return $this->rememberMeEntityClass;
+    }
+    
+    public function getCookieDomain() {
+        return $this->cookieDomain;
+    }
+    
+    public function setCookieDomain($cookieDomain) {
+        $this->cookieDomain = $cookieDomain;
+        return $this;
     }
 }

@@ -13,4 +13,9 @@ interface RememberMeOptionsInterface
      * @return int
      */
     public function getCookieExpire();
+    
+    /**
+     * @return string
+     */
+    public function getCookieDomain();
 }
