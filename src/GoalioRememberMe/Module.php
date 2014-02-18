@@ -5,6 +5,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Http\Request as HttpRequest;
 use Zend\Loader\StandardAutoloader;
 use Zend\Loader\AutoloaderFactory;
+use Zend\EventManager\EventInterface;
 
 class Module {
 
@@ -59,13 +60,17 @@ class Module {
     }
 
 
-    public function onBootstrap(MvcEvent $e) {
+    public function onBootstrap(MvcEvent $e) 
+    {
 
-        if(!$e->getRequest() instanceof HttpRequest) {
+        if (!$e->getRequest() instanceof HttpRequest) {
             return;
         }
 
-        $userIsLoggedIn = $e->getApplication()->getServiceManager()->get('zfcuser_auth_service')->hasIdentity();
+        $app = $e->getApplication();
+        $serviceManager = $app->getServiceManager();
+
+        $userIsLoggedIn = $serviceManager->get('zfcuser_auth_service')->hasIdentity();
         $cookie = $e->getRequest()->getCookie();
 
         // do autologin only if not done before and cookie is present
@@ -76,6 +81,11 @@ class Module {
 
             $auth = $authService->authenticate($adapter);
         }
+
+        $app->getEventManager()->getSharedManager()->attach('ZfcUser\Service\User', 'changePassword.post', function(EventInterface $e) use ($serviceManager) {
+            $userId = $serviceManager->get('zfcuser_auth_service')->getIdentity()->getId();
+            $serviceManager->get('goaliorememberme_rememberme_mapper')->removeAll($userId);
+        });
     }
 }
 
