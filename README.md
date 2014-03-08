@@ -1,13 +1,19 @@
 GoalioRememberMe
 ================
 
-Version 0.0.2 Created by the goalio UG (haftungsbeschränkt)
+Version 0.1.2 Created by the goalio UG (haftungsbeschränkt)
 
 Introduction
 ------------
 
 GoalioRememberMe is an extension module for ZfcUser that provides functionality to
 stay logged in on subsequent visits to the site.
+
+Information
+-----------
+I developed this module to use in our [goalio](http://www.goalio.de) application. There are currently no tests and support
+can be a little slow because we are a small company with only two developers. I appreciate any feedback, pull requests are even better.
+
 
 Requirements
 ------------
@@ -95,8 +101,9 @@ Installation
         );
 
 ### Post-Install: Doctrine2 ORM
+There is an additional module for Doctrine integration [GoalioRememberMeDoctrineORM](https://github.com/goalio/GoalioRememberMeDoctrineORM)
 
-There will be a seperate module available to integrate with Doctrine soon.
+### Usage
 
 Navigate to http://yourproject/user and you should land on a login page.
 
