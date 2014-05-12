@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "zf-commons/zfc-user": "0.*"
+        "zf-commons/zfc-user": "1.*"
     },
     "autoload": {
         "psr-0": {

@@ -1,7 +1,7 @@
 GoalioRememberMe
 ================
 
-Version 0.1.2 Created by the goalio UG (haftungsbeschränkt)
+Version 1.0.0 Created by the goalio UG (haftungsbeschränkt)
 
 Introduction
 ------------
@@ -18,9 +18,9 @@ can be a little slow because we are a small company with only two developers. I 
 Requirements
 ------------
 
-* [Zend Framework 2](https://github.com/zendframework/zf2) (latest master).
-* [ZfcBase](https://github.com/ZF-Commons/ZfcBase) (latest master).
-* [ZfcUser](https://github.com/ZF-Commons/ZfcUser) (latest master).
+* [Zend Framework 2](https://github.com/zendframework/zf2) (requirement of ZfcUser).
+* [ZfcBase](https://github.com/ZF-Commons/ZfcBase) (requirement of ZfcUser).
+* [ZfcUser](https://github.com/ZF-Commons/ZfcUser) (1.*).
 
 Features / Goals
 ----------------
@@ -40,7 +40,7 @@ Installation
 
     ```json
     "require": {
-        "goalio/goalio-rememberme": "0.*"
+        "goalio/goalio-rememberme": "1.*"
     }
     ```
 
