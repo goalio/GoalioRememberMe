@@ -30,7 +30,7 @@ class RememberMe extends AbstractDbMapper
 
     public function updateSerie($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = "' . $entity->getSid() . '"';
+        $where = array('user_id' => $entity->getUserId(), 'sid' => $entity->getSid());
         $hydrator = new RememberMeHydrator;
         return parent::update($entity, $where, $this->tableName, $hydrator);
     }
