@@ -43,19 +43,19 @@ class RememberMe extends AbstractDbMapper
 
     public function removeAll($userId)
     {
-        $where = 'user_id = ' . $userId;
+        $where = array('user_id' => $userId);
         return parent::delete($where, $this->tableName);
     }
 
     public function remove($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = "' . $entity->getSid() . '" AND token = "' . $entity->getToken() . '"';
+        $where = array('user_id' => $entity->getUserId(), 'sid' => $entity->getSid(), 'token' => $entity->getToken());
         return parent::delete($where, $this->tableName);
     }
 
     public function removeSerie($userId, $serieId)
     {
-        $where = 'user_id = ' . $userId . ' AND sid = "' . $serieId . '"';
+        $where = array('user_id' => $userId, 'sid' => $serieId);
         return parent::delete($where, $this->tableName);
     }
 }
