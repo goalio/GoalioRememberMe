@@ -19,6 +19,9 @@ class Login extends ZfcLoginForm
         $this->add(array(
             'type' => 'Zend\Form\Element\Checkbox',
             'name' => 'remember_me',
+            'attributes' => array(
+                'id' => 'remember_me'
+            ),
             'options' => array(
                 'label' => 'Stay logged in',
                 'use_hidden_element' => true,
