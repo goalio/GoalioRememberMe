@@ -2,7 +2,7 @@
 
 namespace GoalioRememberMe\Mapper;
 
-use ZfcBase\Mapper\AbstractDbMapper
+use ZfcBase\Mapper\AbstractDbMapper;
 use Zend\Db\Sql\Where;
 
 class RememberMe extends AbstractDbMapper
@@ -63,8 +63,8 @@ class RememberMe extends AbstractDbMapper
     public function removeSerie($userId, $serieId)
     {
         $where = new Where();
-        $where->equalTo('user_id', userId);
-        $where->equalTo('sid', serieId);
+        $where->equalTo('user_id', $userId);
+        $where->equalTo('sid', $serieId);
         return parent::delete($where, $this->tableName);
     }
 }
