@@ -2,7 +2,8 @@
 
 namespace GoalioRememberMe\Mapper;
 
-use ZfcBase\Mapper\AbstractDbMapper;
+use ZfcBase\Mapper\AbstractDbMapper
+use Zend\Db\Sql\Where;
 
 class RememberMe extends AbstractDbMapper
 {
@@ -30,7 +31,9 @@ class RememberMe extends AbstractDbMapper
 
     public function updateSerie($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = \'' . $entity->getSid() . '\'';
+        $where = new Where();
+        $where->equalTo('user_id', $entity->getUserId());
+        $where->equalTo('sid', $entity->getSid());
         $hydrator = new RememberMeHydrator;
         return parent::update($entity, $where, $this->tableName, $hydrator);
     }
@@ -43,19 +46,25 @@ class RememberMe extends AbstractDbMapper
 
     public function removeAll($userId)
     {
-        $where = 'user_id = ' . $userId;
+        $where = new Where();
+        $where->equalTo('user_id', $userId);
         return parent::delete($where, $this->tableName);
     }
 
     public function remove($entity)
     {
-        $where = 'user_id = ' . $entity->getUserId() . ' AND sid = \'' . $entity->getSid() . '\' AND token = \'' . $entity->getToken() . '\'';
+        $where = new Where();
+        $where->equalTo('user_id', $entity->getUserId());
+        $where->equalTo('sid', $entity->getSid());
+        $where->equalTo('token', $entity->getToken());
         return parent::delete($where, $this->tableName);
     }
 
     public function removeSerie($userId, $serieId)
     {
-        $where = 'user_id = ' . $userId . ' AND sid = \'' . $serieId . '\'';
+        $where = new Where();
+        $where->equalTo('user_id', userId);
+        $where->equalTo('sid', serieId);
         return parent::delete($where, $this->tableName);
     }
 }
