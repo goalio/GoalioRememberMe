@@ -1,5 +1,5 @@
 {
-    "name": "goalio/goalio-rememberme",
+    "name": "prevostc/goalio-rememberme",
     "description": "Adding Remember Me functionalitiy to ZfcUser",
     "type": "library",
     "license": "BSD-3-Clause",
@@ -7,14 +7,7 @@
         "zf2",
         "zfcuser"
     ],
-    "homepage": "https://github.com/goalio/GoalioRememberMe",
-    "authors": [
-        {
-            "name": "Philipp Dobrigkeit",
-            "email": "p.dobrigkeit@goalio.de",
-            "homepage": "http://www.goalio.de"
-        }
-    ],
+    "homepage": "https://github.com/prevostc/GoalioRememberMe",
     "require": {
         "zf-commons/zfc-user": "1.*"
     },
