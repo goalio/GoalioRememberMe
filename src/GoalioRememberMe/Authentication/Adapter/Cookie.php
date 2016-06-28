@@ -4,13 +4,12 @@ namespace GoalioRememberMe\Authentication\Adapter;
 
 use ZfcUser\Authentication\Adapter\AbstractAdapter;
 use Zend\Authentication\Result as AuthenticationResult;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use ZfcUser\Authentication\Adapter\AdapterChainEvent as AuthEvent;
 
-class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
+class Cookie extends AbstractAdapter
 {
     protected $userMapper;
 

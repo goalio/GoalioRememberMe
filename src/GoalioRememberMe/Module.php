@@ -26,12 +26,22 @@ class Module {
     public function getServiceConfig() {
         return array(
             'invokables' => array(
-                'GoalioRememberMe\Authentication\Adapter\Cookie' => 'GoalioRememberMe\Authentication\Adapter\Cookie',
                 'GoalioRememberMe\Form\Login'                    => 'GoalioRememberMe\Form\Login',
-                'goaliorememberme_rememberme_service'            => 'GoalioRememberMe\Service\RememberMe',
             ),
 
             'factories' => array(
+
+                'GoalioRememberMe\Authentication\Adapter\Cookie' => function ($sm) {
+                    $service = new Authentication\Adapter\Cookie;
+                    $service->setServiceManager($sm);
+                    return $service;
+                },
+
+                'goaliorememberme_rememberme_service' => function ($sm) {
+                    $service = new Service\RememberMe;
+                    $service->setServiceManager($sm);
+                    return $service;
+                },
 
                 'goaliorememberme_module_options' => function ($sm) {
                     $config = $sm->get('Config');
