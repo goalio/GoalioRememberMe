@@ -77,6 +77,16 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
 
         $userObject = $this->getUserMapper()->findById($cookie[0]);
 
+        if(!$userObject) {
+            $this->getRememberMeMapper()->removeAll($cookie[0]);
+            $this->getRememberMeService()->removeCookie();
+            $this->setSatisfied(false);
+
+            $e->setCode(AuthenticationResult::FAILURE)
+            ->setMessages(array('User not found.'));
+            return false;
+        }
+
         $this->getRememberMeService()->updateSerie($rememberMe);
 
         // Success!
