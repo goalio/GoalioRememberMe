@@ -66,7 +66,9 @@ class RememberMe extends EventProvider
 
     public function removeCookie()
     {
-        setcookie("remember_me", "", time() - 3600, '/');
+        $cookieDomain = $this->getOptions()->getCookieDomain();
+
+        setcookie("remember_me", "", time() - 3600, '/', $cookieDomain, null, true);
     }
 
     public static function getCookie()
