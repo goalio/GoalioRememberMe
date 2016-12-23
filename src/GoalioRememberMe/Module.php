@@ -1,6 +1,7 @@
 <?php
 namespace GoalioRememberMe;
 
+use GoalioRememberMe\Authentication\Adapter\Cookie;
 use Zend\Mvc\MvcEvent;
 use Zend\Http\Request as HttpRequest;
 use Zend\Loader\StandardAutoloader;
@@ -26,12 +27,15 @@ class Module {
     public function getServiceConfig() {
         return array(
             'invokables' => array(
-                'GoalioRememberMe\Authentication\Adapter\Cookie' => 'GoalioRememberMe\Authentication\Adapter\Cookie',
                 'GoalioRememberMe\Form\Login'                    => 'GoalioRememberMe\Form\Login',
                 'goaliorememberme_rememberme_service'            => 'GoalioRememberMe\Service\RememberMe',
             ),
 
             'factories' => array(
+
+                'GoalioRememberMe\Authentication\Adapter\Cookie' => function ($sm) {
+                    return new Cookie($sm);
+                },
 
                 'goaliorememberme_module_options' => function ($sm) {
                     $config = $sm->get('Config');

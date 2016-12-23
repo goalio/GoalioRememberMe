@@ -10,7 +10,7 @@ use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
 use ZfcUser\Authentication\Adapter\AdapterChainEvent as AuthEvent;
 
-class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
+class Cookie extends AbstractAdapter
 {
     protected $userMapper;
 
@@ -19,6 +19,12 @@ class Cookie extends AbstractAdapter implements ServiceManagerAwareInterface
     protected $serviceManager;
 
     protected $rememberMeService;
+    
+    public function __construct($serviceManager)
+    {
+
+        $this->serviceManager = $serviceManager;
+    }
 
     public function authenticate(AuthEvent $e)
     {
