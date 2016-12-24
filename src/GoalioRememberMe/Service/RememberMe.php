@@ -2,17 +2,22 @@
 
 namespace GoalioRememberMe\Service;
 
-use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use ZfcBase\EventManager\EventProvider;
 use GoalioRememberMe\Options\RememberMeOptionsInterface;
 use Zend\Math\Rand;
 
-class RememberMe extends EventProvider implements ServiceManagerAwareInterface
+class RememberMe extends EventProvider
 {
     protected $mapper, $options;
 
     protected $serviceManager;
+    
+    public function __construct($serviceManager)
+    {
+
+        $this->serviceManager = $serviceManager;
+    }
 
     public function createToken($length = 16)
     {

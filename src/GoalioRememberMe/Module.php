@@ -28,10 +28,12 @@ class Module {
         return array(
             'invokables' => array(
                 'GoalioRememberMe\Form\Login'                    => 'GoalioRememberMe\Form\Login',
-                'goaliorememberme_rememberme_service'            => 'GoalioRememberMe\Service\RememberMe',
-            ),
+             ),
 
             'factories' => array(
+                'goaliorememberme_rememberme_service' => function ($sm) {
+                    return new\GoalioRememberMe\Service\RememberMe($sm);
+                },
 
                 'GoalioRememberMe\Authentication\Adapter\Cookie' => function ($sm) {
                     return new Cookie($sm);
