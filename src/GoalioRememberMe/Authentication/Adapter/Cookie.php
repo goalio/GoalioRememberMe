@@ -138,7 +138,7 @@ class Cookie extends AbstractAdapter
     public function getRememberMeMapper()
     {
         if (null === $this->rememberMeMapper) {
-            $this->rememberMeMapper = $this->getServiceManager()->get('goaliorememberme_rememberme_mapper');
+            $this->rememberMeMapper = $this->serviceManager->get('goaliorememberme_rememberme_mapper');
         }
         return $this->rememberMeMapper;
     }
@@ -151,7 +151,7 @@ class Cookie extends AbstractAdapter
     public function getUserMapper()
     {
         if (null === $this->userMapper) {
-            $this->userMapper = $this->getServiceManager()->get('zfcuser_user_mapper');
+            $this->userMapper = $this->serviceManager->get('zfcuser_user_mapper');
         }
         return $this->userMapper;
     }
@@ -164,7 +164,7 @@ class Cookie extends AbstractAdapter
     public function getRememberMeService()
     {
         if (null === $this->rememberMeService) {
-            $this->rememberMeService = $this->getServiceManager()->get('goaliorememberme_rememberme_service');
+            $this->rememberMeService = $this->serviceManager->get('goaliorememberme_rememberme_service');
         }
         return $this->rememberMeService;
     }
@@ -176,7 +176,7 @@ class Cookie extends AbstractAdapter
      */
     public function logout()
     {
-        $authService = $this->getServiceManager()->get('zfcuser_auth_service');
+        $authService = $this->serviceManager->get('zfcuser_auth_service');
         $user = $authService->getIdentity();
 
         $cookie = explode("\n", $this->getRememberMeService()->getCookie());
