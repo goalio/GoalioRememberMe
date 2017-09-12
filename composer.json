@@ -4,7 +4,7 @@
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "zf3",
         "zfcuser"
     ],
     "homepage": "https://github.com/goalio/GoalioRememberMe",
@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "zf-commons/zfc-user": "1.*"
+        "zf-commons/zfc-user": "^3.0"
     },
     "autoload": {
         "psr-0": {
