@@ -3,7 +3,7 @@
 namespace GoalioRememberMe\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use ZfcBase\EventManager\EventProvider;
+use ZfcUser\EventManager\EventProvider;
 use GoalioRememberMe\Options\RememberMeOptionsInterface;
 use Zend\Math\Rand;
 
