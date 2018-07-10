@@ -5,9 +5,8 @@ namespace GoalioRememberMe\Authentication\Adapter;
 use ZfcUser\Authentication\Adapter\AbstractAdapter;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;
 use ZfcUser\Authentication\Adapter\AdapterChainEvent as AuthEvent;
+use Zend\EventManager\EventInterface;
 
 class Cookie extends AbstractAdapter
 {
@@ -19,11 +18,13 @@ class Cookie extends AbstractAdapter
 
     protected $rememberMeService;
 
-    public function authenticate(AuthEvent $e)
-    {
+    public function authenticate(EventInterface $e) {
+        /* @var $authEvent AuthEvent */
+        $authEvent = $e->getTarget();
         // check if cookie needs to be set, only when prior auth has been successful
-        if($e->getIdentity() !== null && $e->getRequest()->isPost() && $e->getRequest()->getPost()->get('remember_me') == 1) {
-            $userObject = $this->getUserMapper()->findById($e->getIdentity());
+        if ($authEvent->getIdentity() !== null && $authEvent->getRequest()->isPost()
+        && $authEvent->getRequest()->getPost()->get('remember_me') == 1) {
+            $userObject = $this->getUserMapper()->findById($authEvent->getIdentity());
             $this->getRememberMeService()->createSerie($userObject->getId());
 
             /**
@@ -39,13 +40,13 @@ class Cookie extends AbstractAdapter
 
         if ($this->isSatisfied()) {
             $storage = $this->getStorage()->read();
-            $e->setIdentity($storage['identity'])
+            $authEvent->setIdentity($storage['identity'])
                 ->setCode(AuthenticationResult::SUCCESS)
                 ->setMessages(array('Authentication successful.'));
             return;
         }
 
-        $cookies = $e->getRequest()->getCookie();
+        $cookies = $authEvent->getRequest()->getCookie();
 
         // no cookie present, skip authentication
         if(!isset($cookies['remember_me'])) {
@@ -69,7 +70,7 @@ class Cookie extends AbstractAdapter
             $this->getRememberMeService()->removeCookie();
             $this->setSatisfied(false);
 
-            $e->setCode(AuthenticationResult::FAILURE)
+            $authEvent->setCode(AuthenticationResult::FAILURE)
             ->setMessages(array('Possible identity theft detected.'));
             return false;
         }
@@ -79,12 +80,12 @@ class Cookie extends AbstractAdapter
         $this->getRememberMeService()->updateSerie($rememberMe);
 
         // Success!
-        $e->setIdentity($userObject->getId());
+        $authEvent->setIdentity($userObject->getId());
         $this->setSatisfied(true);
         $storage = $this->getStorage()->read();
-        $storage['identity'] = $e->getIdentity();
+        $storage['identity'] = $authEvent->getIdentity();
         $this->getStorage()->write($storage);
-        $e->setCode(AuthenticationResult::SUCCESS)
+        $authEvent->setCode(AuthenticationResult::SUCCESS)
           ->setMessages(array('Authentication successful.'));
 
         // Reference for weak login. Should not be allowed to change PW etc.
@@ -165,9 +166,10 @@ class Cookie extends AbstractAdapter
         $cookie = explode("\n", $this->getRememberMeService()->getCookie());
 
         if($cookie[0] !== '') {
-            $this->getRememberMeService()->removeSerie($user->getId(), $cookie[1]);
+            $user and $this->getRememberMeService()->removeSerie($user->getId(), $cookie[1]);
             $this->getRememberMeService()->removeCookie();
         }
+        $this->getStorage() and $this->getStorage()->clear();
     }
 
 }
